@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NASH Printing & Repair Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">N</div>
+        <div>
+          <h2>NASH</h2>
+          <p>Printing & Repair Shop</p>
+        </div>
+      </div>
+
+      <p class="menu-label">MAIN MENU</p>
+      <nav id="navigation">
+        <button class="nav-link active" data-page="dashboard">▦ <span>Dashboard</span></button>
+        <button class="nav-link" data-page="requests">＋ <span>New Request</span></button>
+        <button class="nav-link" data-page="customers">♙ <span>Customers</span></button>
+        <button class="nav-link" data-page="quotations">▤ <span>Quotations</span></button>
+        <button class="nav-link" data-page="jobs">▣ <span>Job Orders</span></button>
+        <button class="nav-link" data-page="payments">₱ <span>Payments & Records</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="shop-status"><span></span> System Online</div>
+        <p>ITEC 80 Prototype</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <button class="mobile-menu" id="mobileMenu">☰</button>
+          <span class="breadcrumb">NASH / <b id="breadcrumb">Dashboard</b></span>
+        </div>
+        <div class="user-profile">
+          <div class="avatar">A</div>
+          <div><strong>Administrator</strong><small>Shop Manager</small></div>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <section class="page active" id="dashboard">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">OVERVIEW</p>
+              <h1>Dashboard</h1>
+              <p class="subtitle">Welcome back! Here's your shop's current activity.</p>
+            </div>
+            <button class="btn btn-primary" data-go="requests">＋ New Request</button>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon blue">▤</div>
+              <p>Total Customers</p><h2 id="statCustomers">0</h2>
+              <small>Registered customers</small>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon purple">▣</div>
+              <p>Total Job Orders</p><h2 id="statJobs">0</h2>
+              <small>All recorded jobs</small>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon orange">◷</div>
+              <p>Pending Jobs</p><h2 id="statPending">0</h2>
+              <small>Waiting or in progress</small>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">₱</div>
+              <p>Payments Received</p><h2 id="statPayments">₱0.00</h2>
+              <small>Total recorded payments</small>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="panel">
+              <div class="panel-heading">
+                <div><h3>Recent Job Orders</h3><p>Latest shop transactions</p></div>
+                <button class="text-btn" data-go="jobs">View all →</button>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Job ID</th><th>Customer</th><th>Service</th><th>Status</th></tr></thead>
+                  <tbody id="recentJobs"></tbody>
+                </table>
+              </div>
+              <p class="empty-state" id="recentEmpty">No job orders yet. Create your first request.</p>
+            </div>
+
+            <div class="panel quick-panel">
+              <div class="panel-heading"><div><h3>Quick Actions</h3><p>Common shop activities</p></div></div>
+              <button class="quick-action" data-go="requests"><span class="quick-icon blue">＋</span><span><b>Create New Request</b><small>Record a customer order</small></span><span class="arrow">→</span></button>
+              <button class="quick-action" data-go="customers"><span class="quick-icon purple">♙</span><span><b>Manage Customers</b><small>View customer information</small></span><span class="arrow">→</span></button>
+              <button class="quick-action" data-go="jobs"><span class="quick-icon orange">▣</span><span><b>Track Job Orders</b><small>Update production status</small></span><span class="arrow">→</span></button>
+              <button class="quick-action" data-go="payments"><span class="quick-icon green">₱</span><span><b>Record Payment</b><small>Manage payment records</small></span><span class="arrow">→</span></button>
+            </div>
+          </div>
+
+          <div class="panel workflow-panel">
+            <div class="panel-heading"><div><h3>Shop Workflow</h3><p>From customer request to completed transaction</p></div></div>
+            <div class="workflow">
+              <div><span>1</span><b>Request</b><small>Customer order</small></div>
+              <i>→</i>
+              <div><span>2</span><b>Quotation</b><small>Price estimate</small></div>
+              <i>→</i>
+              <div><span>3</span><b>Production</b><small>Job processing</small></div>
+              <i>→</i>
+              <div><span>4</span><b>Payment</b><small>Transaction record</small></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="requests">
+          <div class="page-heading">
+            <div><p class="eyebrow">ORDER MANAGEMENT</p><h1>New Request</h1><p class="subtitle">Enter customer and service details to create an order.</p></div>
+          </div>
+          <div class="panel form-panel">
+            <div class="panel-heading"><div><h3>Customer & Order Details</h3><p>Fields marked with * are required.</p></div></div>
+            <form id="requestForm">
+              <div class="form-grid">
+                <div class="field"><label for="customerName">Customer Name *</label><input id="customerName" required placeholder="Enter full name"></div>
+                <div class="field"><label for="customerPhone">Contact Number *</label><input id="customerPhone" required type="tel" placeholder="09XXXXXXXXX"></div>
+                <div class="field"><label for="customerEmail">Email Address</label><input id="customerEmail" type="email" placeholder="customer@email.com"></div>
+                <div class="field"><label for="serviceType">Service Type *</label><select id="serviceType" required><option value="">Select service</option><option>Printing</option><option>Photocopy</option><option>Tarpaulin</option><option>Graphic Design</option><option>Computer Repair</option><option>Printer Repair</option><option>Other</option></select></div>
+                <div class="field"><label for="orderTitle">Job Description *</label><input id="orderTitle" required placeholder="e.g. 100 pages, full color"></div>
+                <div class="field"><label for="orderQuantity">Quantity *</label><input id="orderQuantity" type="number" min="1" value="1" required></div>
+                <div class="field"><label for="orderPrice">Estimated Total (₱) *</label><input id="orderPrice" type="number" min="0" step="0.01" required placeholder="0.00"></div>
+                <div class="field"><label for="orderDeadline">Target Deadline</label><input id="orderDeadline" type="date"></div>
+                <div class="field full-width"><label for="orderNotes">Additional Notes</label><textarea id="orderNotes" rows="3" placeholder="Special instructions or customer requests"></textarea></div>
+              </div>
+              <div class="form-actions"><button type="reset" class="btn btn-outline">Clear Form</button><button type="submit" class="btn btn-primary">Create Request →</button></div>
+            </form>
+          </div>
+        </section>
+
+        <section class="page" id="customers">
+          <div class="page-heading">
+            <div><p class="eyebrow">CUSTOMER MANAGEMENT</p><h1>Customers</h1><p class="subtitle">View and search registered customer records.</p></div>
+            <button class="btn btn-primary" data-go="requests">＋ Add Customer</button>
+          </div>
+          <div class="panel">
+            <div class="toolbar"><input id="customerSearch" class="search-input" placeholder="Search customer name or contact..."></div>
+            <div class="table-wrap"><table><thead><tr><th>Customer ID</th><th>Name</th><th>Contact</th><th>Email</th><th>Orders</th></tr></thead><tbody id="customersTable"></tbody></table></div>
+            <p class="empty-state" id="customersEmpty">No customers found.</p>
+          </div>
+        </section>
+
+        <section class="page" id="quotations">
+          <div class="page-heading">
+            <div><p class="eyebrow">PRICE ESTIMATES</p><h1>Quotations</h1><p class="subtitle">Review customer estimates and approve requests for production.</p></div>
+            <button class="btn btn-primary" data-go="requests">＋ New Quotation</button>
+          </div>
+          <div class="panel">
+            <div class="toolbar"><input id="quotationSearch" class="search-input" placeholder="Search quotation or customer..."></div>
+            <div class="table-wrap"><table><thead><tr><th>Quotation ID</th><th>Customer</th><th>Service</th><th>Estimated Cost</th><th>Status</th><th>Action</th></tr></thead><tbody id="quotationsTable"></tbody></table></div>
+            <p class="empty-state" id="quotationsEmpty">No quotations available.</p>
+          </div>
+        </section>
+
+        <section class="page" id="jobs">
+          <div class="page-heading">
+            <div><p class="eyebrow">PRODUCTION TRACKING</p><h1>Job Orders</h1><p class="subtitle">Monitor job progress and update production status.</p></div>
+          </div>
+          <div class="panel">
+            <div class="toolbar">
+              <input id="jobSearch" class="search-input" placeholder="Search job ID or customer...">
+              <select id="jobFilter" class="filter-select"><option value="">All statuses</option><option>Pending</option><option>In Progress</option><option>Completed</option><option>Released</option><option>Cancelled</option></select>
+            </div>
+            <div class="table-wrap"><table><thead><tr><th>Job ID</th><th>Customer</th><th>Service</th><th>Deadline</th><th>Total</th><th>Status</th><th>Update</th></tr></thead><tbody id="jobsTable"></tbody></table></div>
+            <p class="empty-state" id="jobsEmpty">No job orders available. Approve a quotation first.</p>
+          </div>
+        </section>
+
+        <section class="page" id="payments">
+          <div class="page-heading">
+            <div><p class="eyebrow">FINANCIAL RECORDS</p><h1>Payments & Records</h1><p class="subtitle">Record customer payments and review outstanding balances.</p></div>
+          </div>
+          <div class="stats-grid payment-stats">
+            <div class="stat-card"><p>Total Payments</p><h2 id="paymentCount">0</h2><small>Recorded transactions</small></div>
+            <div class="stat-card"><p>Total Received</p><h2 id="paymentTotal">₱0.00</h2><small>All payments received</small></div>
+            <div class="stat-card"><p>Outstanding Balance</p><h2 id="paymentBalance">₱0.00</h2><small>Remaining job balances</small></div>
+          </div>
+          <div class="panel">
+            <div class="panel-heading"><div><h3>Record a Payment</h3><p>Select an active job order to record a payment.</p></div></div>
+            <form id="paymentForm">
+              <div class="form-grid">
+                <div class="field"><label for="paymentJob">Job Order *</label><select id="paymentJob" required><option value="">Select job order</option></select></div>
+                <div class="field"><label for="paymentAmount">Payment Amount (₱) *</label><input id="paymentAmount" type="number" min="0.01" step="0.01" required placeholder="0.00"></div>
+                <div class="field"><label for="paymentMethod">Payment Method *</label><select id="paymentMethod" required><option value="">Select method</option><option>Cash</option><option>GCash</option><option>Bank Transfer</option><option>Other</option></select></div>
+                <div class="field"><label for="paymentDate">Payment Date *</label><input id="paymentDate" type="date" required></div>
+              </div>
+              <div class="form-actions"><button type="submit" class="btn btn-primary">Record Payment</button></div>
+            </form>
+          </div>
+          <div class="panel records-panel">
+            <div class="panel-heading"><div><h3>Payment History</h3><p>Recorded customer transactions</p></div><button class="btn btn-outline btn-small" id="exportPayments">Export CSV</button></div>
+            <div class="table-wrap"><table><thead><tr><th>Receipt ID</th><th>Job Order</th><th>Customer</th><th>Date</th><th>Method</th><th>Amount</th></tr></thead><tbody id="paymentsTable"></tbody></table></div>
+            <p class="empty-state" id="paymentsEmpty">No payments recorded yet.</p>
+          </div>
+        </section>
+      </div>
+      <footer>© 2026 NASH Printing & Repair Shop · ITEC 80 High-Fidelity Prototype</footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <div class="modal-backdrop" id="confirmModal">
+    <div class="modal">
+      <div class="modal-icon">✓</div>
+      <h2 id="modalTitle">Confirm Action</h2>
+      <p id="modalMessage">Are you sure you want to continue?</p>
+      <div class="modal-actions"><button class="btn btn-outline" id="modalCancel">Cancel</button><button class="btn btn-primary" id="modalConfirm">Confirm</button></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
